@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\siController;
 use App\Http\Controllers\FormController;
-
+use App\Http\Controllers\formSiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +17,18 @@ use App\Http\Controllers\FormController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/generate-pdf',[App\Http\Controllers\PdfController::class, 'index']);
 
-Route::get('/form', [FormController::class, 'showForm']);
-Route::post('/form', [FormController::class, 'processForm']);
+Route::get('/', [FormController::class, 'showForm']);
+Route::post('/', [FormController::class, 'processForm']);
+
+Route::get('/si', [formSiController::class, 'showForm']);
+Route::post('/si', [formSiController::class, 'processForm']);
+Route::get('/*', function () {
+    return 'helloeawa' ;
+});
 Route::get('/images/{filename}', function ($filename) {
     $path = public_path('images/' . $filename);
-
     if (file_exists($path)) {
         return response()->file($path);
     } else {
