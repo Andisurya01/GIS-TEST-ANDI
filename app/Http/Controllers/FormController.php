@@ -26,6 +26,6 @@ class FormController extends Controller
         $html = view('report_card', compact('formData'));
         $pdf = Pdf::loadHTML($html);
         $dwnload = $pdf->download('report_card.pdf');
-        return $html;
+        return $dwnload;
     }
 }
